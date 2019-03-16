@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home_container">
 
     <!-- 轮播图区域 -->
     <mt-swipe :auto="4000">
@@ -8,10 +8,12 @@
       </mt-swipe-item>
 
     </mt-swipe>
+    <router-view></router-view>
     <ul class="mui-table-view mui-grid-view mui-grid-9">
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
+        <router-link to="/home/newslist">
         <img src="../../images/menu1(1).png" alt="">
-        <div class="mui-media-body">新闻资讯</div></a></li>
+        <div class="mui-media-body">新闻资讯</div></router-link></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
         <img src="../../images/menu2.png" alt="">
         <div class="mui-media-body">图片欣赏</div></a></li>
@@ -56,18 +58,19 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
   .mint-swipe{
     margin-top: 40px;
     height: 200px;
     .mint-swipe-item{
       &:nth-child(1){
         background: -webkit-linear-gradient(
-        top,white,cyan, #af33ff
+        top, #fffeba, #ffd19b, #2bb7ff
         );
       }
       &:nth-child(2){
         background: -webkit-linear-gradient(
-          top, #1835ff, #a8e4ff, #ff1b48
+          top, #4dffbf, #80c7ff, #ff8744
         )
       }
     }
