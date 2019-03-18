@@ -3,6 +3,8 @@ import Vue from 'vue'
 import App from './App.vue'
 import './lib/mui/css/mui.css'
 import './lib/mui/css/icons-extra.css'
+import lazyload from 'vue-lazyload'
+import loading from './images/loading.gif'
 import router from './router.js'
 import moment from 'moment'
 import {Header,Swipe,SwipeItem,Button} from 'mint-ui'
@@ -15,8 +17,12 @@ Vue.filter('dateFormat',function (dateStr, pattern = 'YYYY-MM-DD HH:mm:ss') {
 })
 import VueResouce from 'vue-resource'
 Vue.use(VueResouce)
+Vue.use(lazyload,{
+  loading
+})
 //设置请求的根路径
 Vue.http.options.root = 'http://vue.studyit.io'
+Vue.http.options.emulateHSON = true
 new Vue({
   el:'#app',
   render:p=>p(App),

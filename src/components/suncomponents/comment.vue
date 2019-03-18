@@ -3,11 +3,12 @@
       <h3>Hello I'm COMMENTS</h3>
       <hr>
       <textarea  placeholder="可以输入任何你想输的内容(120字以内)" name="" id="" cols="10" rows="3" maxlength="120" v-model="textContainer"></textarea>
-      <mt-button  type="primary" size="large"> 发送评论</mt-button>
+      <mt-button  type="primary" size="large" @click="postComments"> 发送评论</mt-button>
       <div class="cmt_container">
         <div class="cmt_item" v-for="(comment,index) in comments" :key="index">
           <div class="cmt_header">
-            第{{index+1}}楼&nbsp;&nbsp;用户：{{comment.user_name}}&nbsp;&nbsp;发表时间：{{comment.add_time | dateFormat}}&nbsp;&nbsp;
+            <span>第{{index+1}}楼用户：{{comment.user_name}}&nbsp;</span>
+            <span>发表时间：{{comment.add_time | dateFormat}}</span>
           </div>
           <div class="cmt_content">
             {{comment.content}}
@@ -45,7 +46,7 @@
             content:'我两色入不友好'
           }
         ],
-        textContainer:[],
+        textContainer:'',
         pageIndex:1
       }
     },
@@ -65,6 +66,33 @@
       getMore(){
         this.pageIndex++
         this.getComments()
+      },
+      postComments(){
+
+        if(this.textContainer.length===0)
+        {
+          return Toast('评论内容不能为空')
+        }
+        //以下七行代码模拟实现评论添加功能，因数据接收接口无法访问
+        var cmt={
+          user_name:"ad斯诺克",
+          add_time:Date.now(),
+          content:this.textContainer
+        };
+        this.comments.unshift(cmt);
+        this.textContainer=''
+
+        this.$http.post('api/postcomment/'+this.$route.params.id,{content:this.textContainer.trim()}).then(function (result) {
+            if(result.body.status===0){
+              var cmt={
+                user_name:"ad斯诺克",
+                add_time:Date.now(),
+                content:this.textContainer
+              };
+              this.comments.unshift(cmt);
+              this.textContainer=''
+            }
+        })
       }
     }
 
@@ -85,9 +113,13 @@
     .cmt_item{
       margin: 5px 0;
       .cmt_header{
+        text-align: left;
         border-radius: 3px;
         font-size: 10px;
         background-color: #9ae4ff;
+        span:nth-child(1){
+          border-right:1px solid black ;
+        }
       }
       .cmt_content{
         margin: 5px 5px;

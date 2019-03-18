@@ -14,9 +14,9 @@
         <router-link to="/home/newslist">
         <img src="../../images/menu1(1).png" alt="">
         <div class="mui-media-body">新闻资讯</div></router-link></li>
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/photolist">
         <img src="../../images/menu2.png" alt="">
-        <div class="mui-media-body">图片欣赏</div></a></li>
+        <div class="mui-media-body">图片欣赏</div></router-link></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
         <img src="../../images/menu3.png" alt="">
         <div class="mui-media-body">商品购买</div></a></li>
