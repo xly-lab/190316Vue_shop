@@ -3,14 +3,14 @@
       <div id="slider" class="mui-slider">
         <div id="sliderSegmentedControl" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
           <div class="mui-scroll">
-            <a  v-for="(item,index) in ImgCategoryList" :key=" index" :class="['mui-control-item ',index==0?'mui-active':'']" href="#item1mobile" >
+            <a  v-for="(item,index) in ImgCategoryList" :key=" index" :class="['mui-control-item ',index==0?'mui-active':'']" href="#item1mobile"  @click="">
             {{item.title}}
             </a>
           </div>
         </div>
       </div>
       <ul>
-        <router-link tag="li" :to="'/home/photoinfo/'+item.id"v-for="item in imgList" :key="item.id" >
+        <router-link tag="li" :to="'/home/photoinfo/'+item.id" v-for="item in imgList" :key="item.id" >
           <img v-lazy="item.img_url" alt="">
           <div class="info_container">
             <div class="info_title">{{item.title}}</div>

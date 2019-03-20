@@ -1,7 +1,7 @@
 <template>
-  <div class="app_container">
-    <mt-header fixed title="Vue项目"></mt-header>
-
+  <div class="app_container" :class="{'extra-app_container':$route.path==='/home'}">
+    <!--<mt-header fixed title="Vue项目"></mt-header>-->
+    <HeaderTop title="Vue_商城"></HeaderTop>
     <transition>
       <router-view></router-view>
     </transition>
@@ -16,7 +16,7 @@
         <span class="mui-tab-label">会员</span>
       </router-link>
       <router-link class="mui-tab-item-llb" to="/shopcar">
-				<span class="mui-icon mui-icon-extra mui-icon-extra-cart">
+				<span class="mui-icon mui-icon-extra mui-icon-extra-cart" id="badge">
 					<span class="mui-badge">0</span>
 				</span>
         <span class="mui-tab-label">购物车</span>
@@ -30,14 +30,22 @@
 </template>
 
 <script>
+  import HeaderTop from './components/suncomponents/HeaderTop.vue'
+  export default {
+    components:{
+      HeaderTop
+    }
+  }
 </script>
 
 
 <style  scoped>
   .app_container{
     overflow-x: hidden;
-
     padding-bottom: 50px;
+  }
+  .extra-app_container{
+    margin-top: 40px;
   }
   .mint-header{
     z-index: 99;

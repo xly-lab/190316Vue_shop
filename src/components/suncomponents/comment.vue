@@ -102,8 +102,9 @@
 
 <style lang="scss" scoped>
 .com_container{
+  margin-top: 50px;
   h3{
-    font-size: 16px;
+    font-size: 18px;
   }
   textarea{
     font-size: 12px;

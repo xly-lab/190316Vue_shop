@@ -7,6 +7,7 @@ import lazyload from 'vue-lazyload'
 import loading from './images/loading.gif'
 import router from './router.js'
 import moment from 'moment'
+import './lib/mui/js/mui.js'
 import {Header,Swipe,SwipeItem,Button} from 'mint-ui'
 Vue.component(Header.name,Header)
 Vue.component(Swipe.name, Swipe);
@@ -20,6 +21,20 @@ Vue.use(VueResouce)
 Vue.use(lazyload,{
   loading
 })
+import VuePreview from 'vue-preview'
+// defalut install
+Vue.use(VuePreview)
+Vue.use(VuePreview, {
+  mainClass: 'pswp--minimal--dark',
+  barsSize: {top: 0, bottom: 0},
+  captionEl: false,
+  fullscreenEl: false,
+  shareEl: false,
+  bgOpacity: 0.85,
+  tapToClose: true,
+  tapToToggleControls: false
+})
+
 //设置请求的根路径
 Vue.http.options.root = 'http://vue.studyit.io'
 Vue.http.options.emulateHSON = true

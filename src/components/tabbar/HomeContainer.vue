@@ -2,12 +2,7 @@
   <div class="home_container">
 
     <!-- 轮播图区域 -->
-    <mt-swipe :auto="4000">
-      <mt-swipe-item v-for="(lunbotu ,index) in LunbotuList ":key="index">
-        <a :href="lunbotu.url"><img :src="lunbotu.img" alt=""></a>
-      </mt-swipe-item>
-
-    </mt-swipe>
+    <Swiper :LunbotuList="LunbotuList" :isfull="true"/>
     <router-view></router-view>
     <ul class="mui-table-view mui-grid-view mui-grid-9">
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -17,9 +12,9 @@
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/photolist">
         <img src="../../images/menu2.png" alt="">
         <div class="mui-media-body">图片欣赏</div></router-link></li>
-      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
+      <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><router-link to="/home/goodslist">
         <img src="../../images/menu3.png" alt="">
-        <div class="mui-media-body">商品购买</div></a></li>
+        <div class="mui-media-body">商品购买</div></router-link></li>
       <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3"><a href="#">
         <img src="../../images/menu4.png" alt="">
         <div class="mui-media-body">留言反馈</div></a></li>
@@ -37,6 +32,7 @@
 <script>
   import Vue from 'vue'
 import {Toast} from 'mint-ui'
+  import Swiper from '../suncomponents/swiper.vue'
 Vue.component(Toast.name,Toast)
 export default {
   data(){
@@ -44,37 +40,24 @@ export default {
       LunbotuList:[
         {
           url:"http://www.itcast.cn/subject/phoneweb/index.html",
-          img:"http://ofv795nmp.bkt.clouddn.com/vuelogobanner1.jpg"
+          img:"http://img1.imgtn.bdimg.com/it/u=2735633715,2749454924&fm=26&gp=0.jpg"
         },
         {
           url:"http://www.itcast.cn/subject/phoneweb/index.html",
-          img:"http://ofv795nmp.bkt.clouddn.com/vuelogobanner2-1.jpg"
+          img:"http://pic3.huitu.com/res/20120531/721_20120531125839525174_1.jpg"
         }
       ]
     }
   },
+  components:{
+    Swiper
+  }
 }
 
 </script>
 
 <style lang="scss" scoped>
 
-  .mint-swipe{
-    margin-top: 40px;
-    height: 200px;
-    .mint-swipe-item{
-      &:nth-child(1){
-        background: -webkit-linear-gradient(
-        top, #fffeba, #ffd19b, #2bb7ff
-        );
-      }
-      &:nth-child(2){
-        background: -webkit-linear-gradient(
-          top, #4dffbf, #80c7ff, #ff8744
-        )
-      }
-    }
-  }
   .mui-grid-view.mui-grid-9{
     background-color: white;
     border: none;
