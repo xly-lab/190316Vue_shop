@@ -23,7 +23,7 @@
         <div class="mui-card-content">
           <div class="mui-card-content-inner extra-inner">
             <p class="price">
-              市场价：<del>￥{{good.sell_price|| '没有气不气'}}</del>&nbsp;&nbsp;销售价：<span class="now_price">￥{{good.market_price|| '没有气不气'}}</span>
+              市场价：<del>￥{{good.sell_price|| '1200'}}</del>&nbsp;&nbsp;销售价：<span class="now_price">￥{{good.market_price|| '1300'}}</span>
             </p>
             <p>购买数量:<numbox @getcount="getSelectedCount" :max="good.stock_quantity"></numbox></p>
             <p>
@@ -61,31 +61,37 @@
 <script>
   import Swiper from '../suncomponents/swiper.vue'
   import numbox from '../suncomponents/goodsinfo_numbox.vue'
+  // var Good = JSON.parse(localStorage.getItem('good'))||'[]';
   export default {
-      data(){
-        return{
-            good:this.$route.params.good || '没有气不气',
-            selectedCount:1,
-          ballShow:false,
-            img_url:[
-              {
-                url:'',
-                img:'https://paimgcdn.baidu.com/CF12B6519A4FF238?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F1382924626.jpg&rz=bxt_2_968_600&v=0'},
-              {
-                url:'',
-                img:'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1416313143,2626441215&fm=27&gp=0.jpg'
-              }
-            ]
-        }
-      },
-    methods:{
+    data() {
+      return {
+        id: this.$route.params.id,
+        good:[],
+        selectedCount: 1,
+        ballShow: false,
+        img_url: [
+          {
+            url: '',
+            img: 'https://paimgcdn.baidu.com/CF12B6519A4FF238?src=http%3A%2F%2Fms.bdimg.com%2Fdsp-image%2F1382924626.jpg&rz=bxt_2_968_600&v=0'
+          },
+          {
+            url: '',
+            img: 'https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=1416313143,2626441215&fm=27&gp=0.jpg'
+          }
+        ]
+      }
+    },
+    created(){
+      this.getGood()
+    },
+    methods: {
       goDesc(id) {
         // 点击使用编程式导航跳转到 图文介绍页面
-        this.$router.push({ name: "goodsdesc", params: { id } });
+        this.$router.push({name: "goodsdesc", params: {id}});
       },
       goComment(id) {
         // 点击跳转到 评论页面
-        this.$router.push({ name: "goodscomment", params: { id } });
+        this.$router.push({name: "goodscomment", params: {id}});
       },
       getSelectedCount(count) {
         // 当子组件把 选中的数量传递给父组件的时候，把选中的值保存到 data 上
@@ -95,6 +101,20 @@
       addToShopCar() {
         // 添加到购物车
         this.ballShow = !this.ballShow;
+        this.$store.state.goodLsit.some(item=>{
+          if (this.id === item.id) {
+            var goodItem ={
+              id:this.id,
+              count:this.selectedCount,
+              price:this.good.sell_price,
+              selected:true,
+              title:item.title,
+            };
+            this.$store.commit('addTocart',goodItem)
+            // console.log(goodItem);
+          }
+        });
+        return true
       },
       beforeEnter(el) {
         el.style.transform = "translate(0, 0)";
@@ -123,12 +143,28 @@
       afterEnter(el) {
         this.ballShow = !this.ballShow;
       },
-    },
-      components:{
-        Swiper,numbox
-
+      getGood() {
+        // this.good = this.$store.state.goodLsit.forEach(item => {
+        //   if (this.id === item.id) {
+        //     return item
+        //   }
+        // })
+        // this.$store.state.goodLsit.some(item=>{
+        //   if (this.id === item.id) {
+        //     item.Count= this.selectedCount;
+        //     // this.$store.commit('getLittleGood',item)
+        //     this.good = item;
+        //     localStorage.setItem('good',JSON.stringify(this.good))
+        //   }
+        // })
+          this.good=this.$route.params.good
       }
+    },
+    components: {
+      Swiper, numbox
     }
+  }
+
 
 </script>
 
@@ -164,7 +200,7 @@
      }
    }
   .extra-inner{
-    top:0px;
+    top: 0px;
   }
   .goodsinfo-container .ball[data-v-6934d3ea] {
     width: 15px;

@@ -61,12 +61,7 @@
             }]
           })
           this.goodsList=this.goodsList.concat(data.message)
-          this.$http.get('api/getgoods?pageindex='+this.pageNumber).then(result=>{
-            if(result.body.status===0)
-            {
-              this.goodsList = result.body.message
-            }else{}
-          })
+          this.$store.commit('addGoodList',this.goodsList)
         }
       }
     }
